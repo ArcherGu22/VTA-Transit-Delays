@@ -1,0 +1,10 @@
+pandas>=2.0
+geopandas>=0.14
+matplotlib>=3.8
+plotly>=5.18
+shapely>=2.0
+pyogrio>=0.7
+requests>=2.31
+tqdm>=4.66
+protobuf>=4.0
+gtfs-realtime-bindings>=1.0.0
