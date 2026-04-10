@@ -8,10 +8,10 @@ Generated under [`visualizations/`](visualizations/):
 
 | Output | Description |
 |--------|-------------|
-| `chart 01_average_delay_by_route.png` | Average delay by route (seconds) |
-| `chart 02_top20_delay_hotspots.png` | Top 20 stations for greatest average delays on selected routes |
-| `chart 03_Moving-speed_distribution_by_route.png` | Moving-speed distribution by route (speed > 1 m/s) |
-| `chart 04_proxy_for_stop-and-go_delay` | Percentage of low-speed points by route |
+| `chart_01_average_delay_by_route.png` | Average delay by route (seconds) |
+| `chart_02_top20_delay_hotspots.png` | Top 20 stations for greatest average delays on selected routes |
+| `chart_03_Moving-speed_distribution_by_route.png` | Moving-speed distribution by route (speed > 1 m/s) |
+| `chart_04_proxy_for_stop-and-go_delay` | Percentage of low-speed points by route |
 | `map_grid_stopshare_1200ft.html` | Interactive map: grid mean speed, hover includes low-speed share |
 
 Notebook: [`scripts/03_midterm_visuals.ipynb`](scripts/03_midterm_visuals.ipynb).
