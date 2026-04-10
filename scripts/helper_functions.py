@@ -1,5 +1,3 @@
-# Shared helper functions for the urban analytics project.
-
 import pandas as pd
 import geopandas as gpd
 import plotly.graph_objs
@@ -12,7 +10,7 @@ def quick_px_scattermap(
     **kwargs,
 ) -> plotly.graph_objs._figure.Figure:
     """
-    Converts a GeoDataFrame to a geographic CRS (EPSG:4326) compatible with plotly.express, then plot a scatter map of that GDF.
+    Converts a GeoDataFrame to a geographic CRS (EPSG:4326) compatible with plotly.express, then plots a scatter map of that GDF.
 
     Parameters
     ----------
@@ -24,6 +22,7 @@ def quick_px_scattermap(
         Column name containing point Longitudes (X).
     **kwargs : 
         Add in any additional plotly.express.scatter_map map elements here, such as size, color, hover_data, etc.
+        Refer to the documentation for plotly.express.scatter_map for additional arguments
 
     Returns
     -------
