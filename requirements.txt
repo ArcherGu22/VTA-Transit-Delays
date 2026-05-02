@@ -8,3 +8,5 @@ pyogrio>=0.7
 requests>=2.31
 shapely>=2.0
 tqdm>=4.66
+osmnx>=2.1.0
+networkx>=3.5
