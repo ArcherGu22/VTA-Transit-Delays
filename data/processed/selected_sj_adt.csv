@@ -1,4 +1,4 @@
-counter_id,adt,main_road,counter_location,cross_road,nearby_intersect,geometry,index_right,route_id,route_name,route_desc,category,route_length,object_id
+counter_id,adt,main_road,counter_location,cross_road,nearby_intersect,geometry,index_right,line_id,route_id,route_desc,category,route_length,object_id
 4450,14432.0,AIRPORT BLVD,S of,SKYPORT DR,AIRPORT BLVD & SKYPORT DR,POINT (6148939.75897583 1958001.95603256),20,23904,60,WINCHESTER STN - MILPITAS BART,Frequent,151256.0590185394,21
 4457,8385.0,ALMADEN AVE,N of,WILLOW ST,ALMADEN AVE & WILLOW ST,POINT (6159716.96708016 1941603.89270015),4,23879,25,DE ANZA COL - VMC - ALUM ROCK STN,Frequent,140850.28949079284,5
 4469,848.0,BLEWETT AVE,S of,WILLOW ST,BLEWETT AVE & WILLOW ST,POINT (6154536.48826791 1937960.99808306),4,23879,25,DE ANZA COL - VMC - ALUM ROCK STN,Frequent,140850.28949079284,5
