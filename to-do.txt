@@ -1,0 +1,6 @@
+to-do:
+- calculate stop spacings between consecutive stops (base on road/route distance, use osmnx? or using route polylines?)
+- create unified data table with stop spacings (stop id, passengers, north/west distance, south/east distance, average distance)
+- do any additional cleaning necessary such as checking N/As, NaNs, etc.
+- 2 OLS regression models: 1 for delay, stop spacings, and daily ridership (boardings), and one for those + ADT for only the San Jose Stations. (How to join the ADT with stations? Maybe connect with the preceding stretch of road?)
+- evaluate model coefficients, results, etc.
