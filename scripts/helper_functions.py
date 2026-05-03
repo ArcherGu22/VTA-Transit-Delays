@@ -2,6 +2,31 @@ import pandas as pd
 import geopandas as gpd
 import plotly.graph_objs
 import plotly.express as px
+from shapely import wkt
+from shapely.geometry.base import BaseGeometry
+
+# Data Cleaning
+
+def safe_wkt_load(geo_string) -> BaseGeometry | None:
+    """
+    Converts a string geometry to a geographic object (shape, point, line, etc.).
+    Use on a list of string geometries with .apply()
+    Provides easy handling for N/A and NaN values
+
+    Parameters
+    ----------
+    geo_string : str
+        String geometry to convert to an object
+
+    Returns
+    -------
+    shapely.geometry.base.BaseGeometry
+        Geometry object
+    """
+
+    if pd.isna(geo_string):
+        return None
+    return wkt.loads(geo_string)
 
 # Visualization
 
