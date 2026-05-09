@@ -12,9 +12,18 @@ Generated under [`visualizations/`](visualizations/):
 | `chart_02_top20_delay_hotspots.png` | Top 20 stations for greatest average delays on selected routes |
 | `chart_03_Moving-speed_distribution_by_route.png` | Moving-speed distribution by route (speed > 1 m/s) |
 | `chart_04_proxy_for_stop-and-go_delay` | Percentage of low-speed points by route |
+| `chart_05_scatter_spacing_vs_delay.png` | Stop spacing vs. mean delay (per stop, by route, full-sample Pearson + Spearman) |
+| `chart_06_scatter_boardings_vs_delay.png` | Stop-level boardings vs. mean delay (log x, by route) |
 | `map_grid_stopshare_1200ft.html` | Interactive map: grid mean speed, hover includes low-speed share |
+| `map_grid_with_stop_locations.html` | Refined density-band speed grid + plain stop location markers (Ashley task #3) |
+| `map_grid_with_stations.html` | Bonus: same density grid + bubble overlay (size = boardings, color = delay) |
 
-Notebook: [`scripts/03_midterm_visuals.ipynb`](scripts/03_midterm_visuals.ipynb).
+Notebooks/scripts:
+- [`scripts/03_midterm_visuals.ipynb`](scripts/03_midterm_visuals.ipynb) — charts 01–04 + grid map
+- [`scripts/04_regression_models.ipynb`](scripts/04_regression_models.ipynb) — OSM stop spacings, OLS, Spearman/Pearson robustness check
+- [`scripts/build_scatter_plots.py`](scripts/build_scatter_plots.py) — produces `data/processed/station_spacings*.csv` and charts 05–06
+- [`scripts/build_grid_with_locations_map.py`](scripts/build_grid_with_locations_map.py) — produces `map_grid_with_stop_locations.html`
+- [`scripts/build_station_grid_map.py`](scripts/build_station_grid_map.py) — produces `map_grid_with_stations.html`
 
 ## Environment
 
