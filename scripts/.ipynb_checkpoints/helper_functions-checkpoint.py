@@ -4,6 +4,7 @@ import plotly.graph_objs
 import plotly.express as px
 from shapely import wkt
 from shapely.geometry.base import BaseGeometry
+import networkx as nx
 
 # Data Cleaning
 
@@ -27,6 +28,69 @@ def safe_wkt_load(geo_string) -> BaseGeometry | None:
     if pd.isna(geo_string):
         return None
     return wkt.loads(geo_string)
+
+def compute_osm_spacing(stations_gdf, G):
+    """
+    Computes approximate station spacings between consecutive stops using OpenStreetMap graph routing.
+
+    For each unique (route_id, direction_id) pair, the function sorts stops in 
+    order, computes the shortest-path distance between consecutive stop nodes, 
+    and stores the distance in a new column
+
+    Parameters
+    ----------
+    stations_gdf : geopandas.GeoDataFrame
+        GeoDataFrame containing a list of transit stations, with CRS = EPSG:2227
+
+    Returns
+    -------
+    pandas.DataFrame
+        DataFrame containing all original stop data, with an added 'spacing_ft'
+        While this technically works in other units and CRS as well, we assume 
+        CRS = EPSG:2227
+    """
+
+    # Store processed route/direction groups
+    results = []
+
+    # Process each route + direction separately
+    for (route_id, direction_id), stops in stations_gdf.groupby(
+        ["route_id", "direction_id"]
+    ):
+
+        # order stops by stopping order along the route
+        stops = stops.sort_values("stop_sequence").copy()
+
+        # First stop has no previous stop, so spacing is None
+        spacings = [None]
+
+        # Compute spacing between consecutive stops after the first stop
+        for i in range(1, len(stops)):
+
+            # Previous stop node
+            n1 = stops.iloc[i - 1]["node"]
+            # Current stop node
+            n2 = stops.iloc[i]["node"]
+
+            try:
+                # Shortest network distance along the street graph
+                dist = nx.shortest_path_length(
+                    G,
+                    n1,
+                    n2,
+                    weight="length"
+                )
+
+            except:
+                # Handle disconnected nodes or routing failures
+                dist = None
+
+            spacings.append(dist)
+
+        stops["spacing_ft"] = spacings
+        results.append(stops)
+
+    return pd.concat(results, ignore_index=True)
 
 # Visualization
 
