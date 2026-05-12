@@ -1,2 +1,0 @@
-to-do:
-- come back to 02_data_cleaning after getting monday data
