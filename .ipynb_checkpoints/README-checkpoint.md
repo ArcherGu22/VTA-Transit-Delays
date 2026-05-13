@@ -1,34 +1,50 @@
 # VTA-Transit-Delays
 
-CYPLAN 255 — VTA bus delay, stop spacing, and ridership (Spring 2026).
+CYPLAN 255 — VTA bus delay, stop spacing, and ridership (Spring 2026).  
+Group 5: Archer Gu, Ashley Li, Yidan Tang
 
-## Final deliverables (graphics)
+## Project Structure
+VTA-Transit-Delays/
+├── data/
+│   ├── raw/
+│   └── processed/
+├── visualizations/
+├── scripts/
+│   ├── 01_gtfs_live_feed_extractors.ipynb
+│   ├── 02_data_cleaning.ipynb
+│   ├── 03_regression_models.ipynb
+│   ├── 04_visualizations.ipynb
+│   └── 05_helper_functions.py
+├── report.pdf
+└── requirements.txt
+
+## Scripts
+
+| Script | Description |
+|--------|-------------|
+| `01_gtfs_live_feed_extractors.ipynb` | Pulls 511 GTFS-Realtime vehicle positions (requires API key) |
+| `02_data_cleaning.ipynb` | Cleans and processes ridership, stops, routes, ADT, and vehicle position data |
+| `03_regression_models.ipynb` | Computes stop spacing (OSM), runs OLS and Spearman/Pearson correlation analysis |
+| `04_visualizations.ipynb` | Generates all figures and interactive maps |
+| `05_helper_functions.py` | Shared utility functions used across notebooks |
+
+## Figures
 
 Generated under `visualizations/`:
 
 | Output | Description |
 |--------|-------------|
 | `fig_01_mean_delay_by_route.png/.svg` | Mean arrival delay by route with 95% CI (seconds) |
-| `fig_02_top20_delay_hotspots.png/.svg` | Top 20 stops by mean arrival delay across selected routes |
+| `fig_02_top20_delay_hotspots.png/.svg` | Top 20 stops by mean arrival delay |
 | `fig_03_moving_speed_by_route.png/.svg` | Moving-speed distribution by route (speed > 1 m/s) |
 | `fig_04_stop_idle_share_by_route.png/.svg` | Share of low-speed points by route (speed < 0.5 mph) |
-| `fig_05a_map_stop_spacing_local.html` | Interactive map: stop spacing along local routes (22/23/25/60) |
-| `fig_05b_map_stop_spacing_rapid.html` | Interactive map: stop spacing along rapid routes (522/523) |
+| `fig_05a_map_stop_spacing_local.html` | Interactive map: stop spacing, local routes (22/23/25/60) |
+| `fig_05b_map_stop_spacing_rapid.html` | Interactive map: stop spacing, rapid routes (522/523) |
 | `fig_06_map_grid_stopshare_1200ft.html` | Interactive grid map (1200 ft): mean speed + low-speed share |
-| `fig_07_scatter_spacing_vs_delay.png/.svg` | Stop spacing vs. mean arrival delay (per stop, by route; Pearson + Spearman) |
+| `fig_07_scatter_spacing_vs_delay.png/.svg` | Stop spacing vs. mean arrival delay (Pearson + Spearman) |
 | `fig_08_scatter_boardings_vs_delay.png/.svg` | Stop-level boardings vs. mean arrival delay (log x, by route) |
-| `fig_09_map_bubble_ridership_delay.html` | Interactive bubble map: stop locations sized by boardings, colored by delay |
-| `fig_10_map_delay_hotspot_adt.html` | Interactive map: delay hotspot stops overlaid with San José ADT counters |
-
-## Notebooks/scripts
-
-- [`scripts/01_gtfs_route_location_speed_extractor.ipynb`] — pull 511 GTFS-Realtime vehicle positions (requires API key)
-- [`scripts/02_preliminary_data_cleaning.ipynb`] — ridership, stops, routes, ADT, and vehicle buffer filter
-- [`scripts/03_midterm_visuals.ipynb`] — figures 01–04 + grid map (fig_06)
-- [`scripts/04_regression_models.ipynb`] — stop spacing computation (OSM), OLS, Spearman/Pearson robustness checks; produces figures 07–08
-- [`scripts/build_scatter_plots.py`] — produces `data/processed/station_spacings*.csv` and figures 07–08
-- [`scripts/build_grid_with_locations_map.py`] — produces `fig_06_map_grid_stopshare_1200ft.html`
-- [`scripts/build_station_grid_map.py`] — produces `fig_09_map_bubble_ridership_delay.html`
+| `fig_09_map_bubble_ridership_delay.html` | Bubble map: stops sized by boardings, colored by delay |
+| `fig_10_map_delay_hotspot_adt.html` | Delay hotspot stops overlaid with San José ADT counters |
 
 ## Environment
 
@@ -38,30 +54,25 @@ source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## Reproducing the pipeline
+## Reproducing the Pipeline
 
-1. **Raw vehicle GTFS-RT sample** (already in repo):
-   `data/raw/vehicle_route_location_speed_data_20260326_103149.csv`
+Run notebooks in order:
 
-2. **Corridor filter** (250 ft buffer around selected routes) — produces
-   `data/processed/vehicle_points_filtered_buffer250ft.csv`:
 ```bash
-   python scripts/run_vehicle_buffer_filter.py
+cd scripts
+jupyter nbconvert --to notebook --execute 02_data_cleaning.ipynb --inplace
+jupyter nbconvert --to notebook --execute 03_regression_models.ipynb --inplace
+jupyter nbconvert --to notebook --execute 04_visualizations.ipynb --inplace
 ```
-   (Equivalent logic lives at the end of `scripts/02_preliminary_data_cleaning.ipynb`.)
 
-3. **Figures and maps:**
-```bash
-   cd scripts
-   jupyter nbconvert --to notebook --execute 03_midterm_visuals.ipynb --inplace
-   jupyter nbconvert --to notebook --execute 04_regression_models.ipynb --inplace
-   python build_scatter_plots.py
-   python build_grid_with_locations_map.py
-   python build_station_grid_map.py
-```
-   Or open each notebook in Jupyter and run all cells.
-   Use `MPLBACKEND=Agg` for headless runs if needed.
+Or open each notebook in Jupyter and run all cells (`Restart & Run All`).  
+Use `MPLBACKEND=Agg` for headless runs if needed.
 
-## Team
+> Note: `01_gtfs_live_feed_extractors.ipynb` requires a 511 API key and live feed access.
+> Raw vehicle position data is already included in `data/raw/`.
 
-See project docs for roles (content, slides, video).
+## Data Sources
+
+- VTA Open Data Portal: route shapes, stop locations, ridership by stop
+- 511 Open Transit Data: GTFS-Realtime vehicle positions and trip updates
+- City of San José GIS Open Data: Average Daily Traffic (ADT) counters
