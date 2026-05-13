@@ -6,21 +6,6 @@ Group 5: Yidan Tang, Archer Gu, Ashley Li
 This project is presented as an ArcGIS StoryMap:  
 👉 [VTA Transit Delays — StoryMap]([https://storymaps.arcgis.com/stories/61af1aa47b94452aad8ae69a7cc74dbc])
 
-## Project Structure
-VTA-Transit-Delays/
-├── data/
-│   ├── raw/
-│   └── processed/
-├── visualizations/
-├── scripts/
-│   ├── 01_gtfs_live_feed_extractors.ipynb
-│   ├── 02_data_cleaning.ipynb
-│   ├── 03_regression_models.ipynb
-│   ├── 04_visualizations.ipynb
-│   └── 05_helper_functions.py
-├── report.pdf
-└── requirements.txt
-
 ## Scripts
 
 | Script | Description |
