@@ -4,7 +4,7 @@ CYPLAN 255 — VTA bus delay, stop spacing, and ridership (Spring 2026).
 Group 5: Yidan Tang, Archer Gu, Ashley Li
 
 This project is presented as an ArcGIS StoryMap:  
-👉 [VTA Transit Delays — StoryMap]([https://storymaps.arcgis.com/stories/61af1aa47b94452aad8ae69a7cc74dbc])
+👉 https://storymaps.arcgis.com/stories/61af1aa47b94452aad8ae69a7cc74dbc
 
 ## Scripts
 
