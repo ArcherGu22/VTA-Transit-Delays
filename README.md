@@ -14,7 +14,7 @@ This project is presented as an ArcGIS StoryMap:
 | `02_data_cleaning.ipynb` | Cleans and processes ridership, stops, routes, ADT, and vehicle position data |
 | `03_regression_models.ipynb` | Computes stop spacing (OSM), runs OLS and Spearman/Pearson correlation analysis |
 | `04_visualizations.ipynb` | Generates all figures and interactive maps |
-| `05_helper_functions.py` | Shared utility functions used across notebooks |
+| `helper_functions.py` | Shared utility functions used across notebooks |
 
 ## Figures
 
